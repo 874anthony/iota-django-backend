@@ -2,10 +2,11 @@ import os
 import requests
 from django.contrib.auth.models import User
 from requests_oauthlib import OAuth2Session
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import UserProfile
 from django.http import JsonResponse
+from rest_framework.permissions import AllowAny
 
 # OAuth Configuration ENV variables -> To move to .env file
 GITHUB_CLIENT_ID = os.environ.get("GITHUB_CLIENT_ID")
@@ -18,6 +19,7 @@ GITHUB_TOKEN_URL = "https://github.com/login/oauth/access_token"
 GITHUB_API_URL = "https://api.github.com/user"
 
 @api_view(["GET"])
+@permission_classes([AllowAny])
 def login_github(request):
     """Returns the GitHub authorization URL."""
     github = OAuth2Session(GITHUB_CLIENT_ID)
