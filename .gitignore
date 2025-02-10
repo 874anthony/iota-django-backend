@@ -1,0 +1,13 @@
+# Django specific files
+*.log
+*.pot
+*.pyc
+*/__pycache__/
+db.sqlite3
+media/
+staticfiles/
+.env
+
+# Ignore the virtual environment
+venv/
+
